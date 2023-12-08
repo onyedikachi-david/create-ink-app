@@ -39,3 +39,6 @@ The README provides detailed instructions for getting started with the developme
 The README includes a section on setting up VSCode for development, including recommended plugins and workspace integration.
 
 For more detailed information, please refer to the README files in the template.
+
+
+This project was inspired by `create-eth` and aims to provide a similar development experience for ink! smart contracts.
