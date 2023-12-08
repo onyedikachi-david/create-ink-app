@@ -1,5 +1,3 @@
-const contents = () =>
-  `# package management
 **/node_modules
 **/.pnp
 .pnp.js
@@ -47,6 +45,5 @@ coverage.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-workspace
-.history/`
+.history/
 
-export default contents

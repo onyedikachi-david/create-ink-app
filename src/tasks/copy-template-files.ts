@@ -6,6 +6,7 @@ import { baseDir } from "../utils/conts";
 import path from "path";
 import { findFilesRecursiveSync } from "../utils/find-files-recursively";
 import { mergePackageJson } from "../utils/merge-package-json";
+import { execa } from "execa";
 
 const copy = promisify(ncp);
 let copyOrLink = copy;
@@ -27,12 +28,12 @@ const copyBaseFiles = async (
   await copyOrLink(basePath, targetDir, {
     clobber: false,
     filter: (fileName) => {
-      const isTemplate = isTemplateRegex.test(fileName);
+      // const isTemplate = isTemplateRegex.test(fileName);
       const isPackageJson = isPackageJsonRegex.test(fileName);
       const isPnpmLock = isPnpmLockRegex.test(fileName);
       const isNextGenrated = isNextGeneratedRegex.test(fileName);
 
-      const skipAlways = isTemplate || isPackageJson;
+      const skipAlways = isPackageJson;
       const skipDevOnly = isPnpmLock || isNextGenrated;
       const shouldSkip = skipAlways || (isDev && skipDevOnly);
 
@@ -80,5 +81,10 @@ export async function copyTemplateFiles(
   copyOrLink = options.dev ? link : copy;
   const basePath = path.join(templateDir, baseDir);
 
-  await copyBaseFiles(options, basePath, targetDir)
+  // Copy the base template to target directory.
+  await copyBaseFiles(options, basePath, targetDir);
+
+  // Initialize git repo
+  await execa("git", ["init"], { cwd: targetDir });
+  await execa("git", ["checkout", "-b", "main"], { cwd: targetDir });
 }
