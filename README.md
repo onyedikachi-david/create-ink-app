@@ -4,6 +4,8 @@
 
 Create-ink!-dapp is a development tool for creating ink! smart contracts and decentralized applications (dApps) on the Polkadot network. It provides a streamlined workflow for developing, testing, and deploying ink! projects.
 
+![](demo.gif)
+
 ## Features
 
 - **VSCode Workspace Integration**: It's recommended to develop in VSCode by opening the workspace file `inkathon.code-workspace` for a more predictable monorepo configuration.
